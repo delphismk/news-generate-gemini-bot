@@ -1,12 +1,11 @@
 # ニュース生成ボット（News Generate Gemini Bot）
+NewsAPI からタイトル(title)と概要(description)を取得し、Geminiに取得したタイトルと概要から記事を創作してもらい、 PDF に変換し、メールで送信する Python スクリプトです。
 
-NewsAPI からニュースタイトルを取得し、Gemini で記事を生成して PDF に変換し、メールで送信する Python スクリプトです。
-
-## 🚀 機能
-- NewsAPI からニュース取得
-- Gemini で記事生成
-- 生成した記事を PDF に変換
-- Gmail で毎朝 9 時に自動送信
+##  機能
+1. NewsAPI からタイトル(title)と概要(description)を取得
+2. タイトルと概要を元に記事内容を創作するプロンプトをGeminiに投げる
+3. Geminiが創作した記事を PDF に変換
+4. プログラム実行時にenvファイルに定義したGmailアドレスにPDFが送信される
 
 ## 🛠 セットアップ
 1. 必要な Python パッケージをインストール
