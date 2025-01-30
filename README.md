@@ -25,7 +25,7 @@
 - GMAIL_PASS=your_email_password
 - GMAIL_RECEIVER=receiver_email
 
-##使い方
+## 使い方
 1. apikey.envを作成しNEWSAPIのAPIキーとGEMINI　APIのAPIキーをセット(無料)
 2. apikey.envにGmailのアドレスとアプリパスワードをセット
 3. news-guess-gemini.py をダウンロードし、ローカル環境で実行
