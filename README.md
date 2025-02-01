@@ -1,4 +1,4 @@
-# ニュース創作ボット（News Generate Gemini Bot）
+# 🗞️ニュース創作ボット（News Generate Gemini Bot）
 記事のタイトルと概要を元にニュースの記事の要約をAIに作成してもらい、自分のメールにPDF形式でニュースを送ってもらうpythonスクリプトです。
 
 ---
