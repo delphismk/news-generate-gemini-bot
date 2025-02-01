@@ -31,7 +31,7 @@
 NEWSAPI_KEY=your_newsapi_key
 GEMINI_API_KEY=your_gemini_api_key
 GMAIL_USER=your_email
-GMAIL_PASS=your_email_password
+GMAIL_APP_PASS=your_email_application_password
 GMAIL_RECEIVER=receiver_email
 ```
 - [NEWSAPIのAPIキー](https://newsapi.org/docs)
