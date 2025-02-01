@@ -38,10 +38,10 @@ GMAIL_RECEIVER=receiver_email
 
 ## カスタマイズ
 ### 取得する記事数
-main()内のmaxarticlesで指定してください<br>
+main()内のmaxarticlesで指定してください。<br>
 (デフォルト：maxarticles=5)
 ### 取得したいニュースジャンル
-get_latest_news(max_articles)内のurlのクエリパラメタを変更してください<br>
+get_latest_news(max_articles)内のurlのクエリパラメタを変更してください。<br>
 (デフォルト：country=us,category=business)<br>
 ※[NewsAPIの詳細なIF定義](https://newsapi.org/docs/endpoints/top-headlines)
 
