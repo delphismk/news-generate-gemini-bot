@@ -34,6 +34,10 @@ GMAIL_USER=your_email
 GMAIL_PASS=your_email_password
 GMAIL_RECEIVER=receiver_email
 ```
+- [NEWSAPIのAPIキー](https://newsapi.org/docs)
+- [GEMINIのAPIキー](https://ai.google.dev/gemini-api/docs/api-key?hl=ja)
+- [Gmailの**アプリ**パスワード](https://support.google.com/accounts/answer/185833?sjid=12865376057855948558-NC)
+
 ---
 
 ## カスタマイズ
