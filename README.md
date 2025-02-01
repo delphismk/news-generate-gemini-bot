@@ -47,7 +47,7 @@ main()内のmaxarticlesで指定してください。<br>
 ### 取得したいニュースジャンル
 get_latest_news(max_articles)内のurlのクエリパラメタを変更してください。<br>
 (デフォルト：country=us,category=business)<br>
-※[NewsAPIの詳細なIF定義](https://newsapi.org/docs/endpoints/top-headlines)
+- [NewsAPIの詳細なIF定義](https://newsapi.org/docs/endpoints/top-headlines)
 
 ---
 ## 注意点
