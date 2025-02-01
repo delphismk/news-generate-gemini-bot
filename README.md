@@ -1,52 +1,53 @@
 # ニュース創作ボット（News Generate Gemini Bot）
-記事のタイトルと概要を元にニュースの記事内容をAIに創作してもらい、自分のメールにPDF形式でニュースを送ってもらうpythonスクリプト
+記事のタイトルと概要を元にニュースの記事の要約をAIに作成してもらい、自分のメールにPDF形式でニュースを送ってもらうpythonスクリプト
 
-##  機能
-1. NewsAPI からタイトル(title)と概要(description)を取得
-2. タイトルと概要を元に記事内容を創作するプロンプトをGeminiに投げる
-3. Geminiが創作した記事を PDF に変換
-4. プログラム実行時にenvファイルに定義したGmailアドレスにPDFが送信される
+---
 
-## ライブラリ
-- import os
-- import sys
-- import time
-- import google.generativeai as genai
-- import requests
-- import smtplib
-- from email.message import EmailMessage
-- from dotenv import load_dotenv
-- from weasyprint import HTML
+## **🔹 機能**
+1. **NewsAPI** から最新ニュースのタイトル・概要・本文を取得
+2. 取得した情報をもとに **Gemini API** にニュース記事の要約を生成させる
+3. **生成された要約を PDF に変換**
+4. **Gmail を利用して PDF を指定のメールアドレスへ送信**
 
-## .envファイルについて
-- NEWSAPI_KEY=your_newsapi_key
-- GEMINI_API_KEY=your_gemini_api_key
-- GMAIL_USER=your_email
-- GMAIL_PASS=your_email_password
-- GMAIL_RECEIVER=receiver_email
+---
 
-## 使い方
-1. apikey.envを作成しNEWSAPIのAPIキーとGEMINI　APIのAPIキーをセット(無料)
-2. apikey.envにGmailのアドレスとアプリパスワードをセット
-3. news-guess-gemini.py をダウンロードし、ローカル環境で実行
+## **📌 使用ライブラリ**
+- `os`
+- `sys`
+- `google.generativeai`
+- `requests`
+- `smtplib`
+- `email.message.EmailMessage`
+- `dotenv.load_dotenv`
+- `weasyprint.HTML`
 
-## 今後の課題
-・このスクリプトをGCP上でスケジューラ実行できるようにする
-・スクレイピング可のニュースサイト(候補：The Gurdian)を調査し、記事本文をスクレイピングしGEMINIに要約してもらう処理へ変更することで記事内容の信憑性・クオリティを上げる
+---
 
-## 背景
+## **🛠 環境変数 (`.env` ファイル)**
+本スクリプトの実行には `.env` ファイルが必要です。  
+ルートディレクトリに `.env` を作成し、以下のように設定してください。
 
-### 本スクリプトの作成背景
-私はテレビを持っておらず、YouTubeでニュースを得ることが多かったため、特定分野には詳しくなるものの、幅広いニュースを知る機会が少なかった。
-しかし、毎日ニュースアプリを開くのは面倒だと感じたため、効率的に情報収集できる方法を考えた。
-最初は Web スクレイピングでニュース記事を取得しようとしたが、スクレイピングを禁止しているサイトが多いことを知り、代わりに NewsAPI を使って記事タイトルと概要を取得する方法を選択。
-そこから Gemini を使って創作記事を生成し、PDF にまとめてメールで送信するスクリプトを作成するに至った。
+```plaintext
+NEWSAPI_KEY=your_newsapi_key
+GEMINI_API_KEY=your_gemini_api_key
+GMAIL_USER=your_email
+GMAIL_PASS=your_email_password
+GMAIL_RECEIVER=receiver_email
+```
+---
 
+## カスタマイズ
+### 取得する記事数
+main()内のmaxarticlesで指定してください<br>
+(デフォルト：maxarticles=5)
+### 取得したいニュースジャンル
+get_latest_news(max_articles)内のurlのクエリパラメタを変更してください<br>
+(デフォルト：country=us,category=business)<br>
+※[NewsAPIの詳細なIF定義](https://newsapi.org/docs/endpoints/top-headlines)
 
-### 本スクリプト作成の手段と私のスキルセット
-現在、Pythonは学習中であり、本スクリプトはChatGPT-4oの助けを借りながら試行錯誤して作成しました。(100回以上やり取りしました)
-Udemyを活用してPythonを学習中であり、今後さらにスクリプトの精度を高め、GCPなどを活用したクラウド環境への展開も試みていきます。
-
-
+---
+## 注意点
+### 記事の信頼性
+NewsAPIのDEVプランでは取得できる記事本文に限りがある(200字以降は切り捨てられる)こと、記事本文が存在しない記事もあること。これらからGEMINIに十分な情報をINPUTできていない可能性がある。
 
 
