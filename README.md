@@ -1,5 +1,5 @@
 # 🗞️ニュース創作ボット（News Generate Gemini Bot）
-記事のタイトル/概要/本文を元にニュースの記事の要約をAIに作成してもらい、自分のメールにPDF形式でニュースを送ってもらうpythonスクリプトです。
+記事のタイトル/概要/本文を元にニュースの記事の要約をAIに作成してもらい、自分のメールにPDF形式でニュースを送ってもらうpythonスクリプト。
 
 ---
 
@@ -24,8 +24,8 @@
 ---
 
 ## **🛠 環境変数 (`.env` ファイル)**
-本スクリプトの実行には `.env` ファイルが必要です。  
-ルートディレクトリに `.env` を作成し、以下のように設定してください。
+本スクリプトの実行には `.env` ファイルが必要。  
+ルートディレクトリに `.env` を作成し、以下のように設定。
 
 ```plaintext
 NEWSAPI_KEY=your_newsapi_key
@@ -42,16 +42,16 @@ GMAIL_RECEIVER=receiver_email
 
 ## カスタマイズ
 ### 取得する記事数
-main()内のmaxarticlesで指定してください。<br>
+main()内のmaxarticlesで指定。<br>
 (デフォルト：maxarticles=5)
 ### 取得したいニュースジャンル
-get_latest_news(max_articles)内のurlのクエリパラメタを変更してください。<br>
+get_latest_news(max_articles)内のurlのクエリパラメタを変更。<br>
 (デフォルト：country=us,category=business)<br>
 - [NewsAPIの詳細なIF定義](https://newsapi.org/docs/endpoints/top-headlines)
 
 ---
 ## 注意点
 ### 記事の信頼性
-NewsAPIのDeveloperプランでは取得できる記事本文に限りがある(200字以降は切り捨てられる)こと、記事本文が存在しない記事もあることからGEMINIに十分な情報をINPUTできていない可能性があります。
+NewsAPIのDeveloperプランでは取得できる記事本文に限りがある(200字以降は切り捨てられる)こと、記事本文が存在しない記事もあることからGEMINIに十分な情報をINPUTできていない可能性あり。
 
 
