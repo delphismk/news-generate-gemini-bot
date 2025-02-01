@@ -14,7 +14,7 @@ sys.stdout.reconfigure(encoding='utf-8', line_buffering=True)
 NEWSAPI_KEY = None
 GEMINI_API_KEY = None
 GMAIL_USER = None
-GMAIL_PASS = None
+GMAIL_APP_PASS = None
 GMAIL_RECEIVER = None
 
 
@@ -26,7 +26,7 @@ def load_environment():
 
 def validate_env():
     """環境変数の検証"""
-    required_keys = ["NEWSAPI_KEY", "GEMINI_API_KEY", "GMAIL_USER", "GMAIL_PASS", "GMAIL_RECEIVER"]
+    required_keys = ["NEWSAPI_KEY", "GEMINI_API_KEY", "GMAIL_USER", "GMAIL_APP_PASS", "GMAIL_RECEIVER"]
     missing_keys = [key for key in required_keys if not os.getenv(key)]
     if missing_keys:
         raise ValueError(f"❌ 以下の環境変数が見つかりません: {', '.join(missing_keys)}")
@@ -34,11 +34,11 @@ def validate_env():
 
 def configure_api():
     """API のセットアップ"""
-    global NEWSAPI_KEY, GEMINI_API_KEY, GMAIL_USER, GMAIL_PASS, GMAIL_RECEIVER
+    global NEWSAPI_KEY, GEMINI_API_KEY, GMAIL_USER, GMAIL_, GMAIL_RECEIVER
     NEWSAPI_KEY = os.getenv("NEWSAPI_KEY")
     GEMINI_API_KEY = os.getenv("GEMINI_API_KEY")
     GMAIL_USER = os.getenv("GMAIL_USER")
-    GMAIL_PASS = os.getenv("GMAIL_PASS")
+    GMAIL_APP_PASS = os.getenv("GMAIL_APP_PASS")
     GMAIL_RECEIVER = os.getenv("GMAIL_RECEIVER")
     genai.configure(api_key=GEMINI_API_KEY)
 
@@ -142,7 +142,7 @@ def send_email(pdf_filename):
         with open(pdf_filename, "rb") as f:
             msg.add_attachment(f.read(), maintype="application", subtype="pdf", filename=pdf_filename)
         with smtplib.SMTP_SSL("smtp.gmail.com", 465) as server:
-            server.login(GMAIL_USER, GMAIL_PASS)
+            server.login(GMAIL_USER, GMAIL_APP_PASS)
             server.send_message(msg)
     except Exception as e:
         raise RuntimeError(f"⚠️ メール送信に失敗しました: {e}")
