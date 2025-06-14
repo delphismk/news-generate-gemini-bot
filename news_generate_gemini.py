@@ -29,7 +29,7 @@ def validate_env():
     required_keys = ["NEWSAPI_KEY", "GEMINI_API_KEY", "GMAIL_USER", "GMAIL_APP_PASS", "GMAIL_RECEIVER"]
     missing_keys = [key for key in required_keys if not os.getenv(key)]
     if missing_keys:
-        raise ValueError(f"❌ 以下の環境変数が見つかりません: {', '.join(missing_keys)}")
+        raise ValueError(f"以下の環境変数が見つかりません: {', '.join(missing_keys)}")
 
 
 def configure_api():
@@ -50,10 +50,10 @@ def get_latest_news(max_articles):
         response = requests.get(url, timeout=10)
         data = response.json()
         if data.get("status") != "ok":
-            raise ValueError(f"⚠️ NewsAPI エラー: {data.get('message')}")
+            raise ValueError(f"NewsAPI エラー: {data.get('message')}")
         return data.get("articles", [])
     except requests.RequestException as e:
-        raise RuntimeError(f"❌ NewsAPI 取得中にエラー発生: {e}")
+        raise RuntimeError(f"NewsAPI 取得中にエラー発生: {e}")
 
 
 def extract_element(article):
@@ -111,11 +111,11 @@ def process_articles(articles):
     """記事を処理してHTMLフォーマットの文字列を作成"""
     content = ""
     for article in articles:
-        title, summary = generate_news_summary(*extract_element(article)[:3])  # ✅ 1回だけ呼ぶ
+        title, summary = generate_news_summary(*extract_element(article)[:3])  
 
-        content += f"<h2>📰 {title}</h2>"
+        content += f"<h2>{title}</h2>"
         content += f"<p>{summary}</p>"
-        content += f"<p>🔗 <a href='{extract_element(article)[3]}'>{extract_element(article)[3]}</a></p>"
+        content += f"<p><a href='{extract_element(article)[3]}'>{extract_element(article)[3]}</a></p>"
 
     return content
 
@@ -124,18 +124,18 @@ def create_pdf(content, filename="news_summary.pdf"):
     """ニュースの要約をPDFファイルとして保存"""
     try:
         HTML(
-            string=f"<html><head><meta charset='UTF-8'></head><body><h1>📰 今日のニュース要約</h1>{content}</body></html>").write_pdf(
+            string=f"<html><head><meta charset='UTF-8'></head><body><h1>今日のニュース要約</h1>{content}</body></html>").write_pdf(
             filename)
         return filename
     except Exception as e:
-        raise RuntimeError(f"⚠️ PDF作成に失敗しました: {e}")
+        raise RuntimeError(f"PDF作成に失敗しました: {e}")
 
 
 def send_email(pdf_filename):
     """生成したPDFをGmailで送信"""
     try:
         msg = EmailMessage()
-        msg["Subject"] = "📩 今日のニュース要約"
+        msg["Subject"] = "今日のニュース要約"
         msg["From"] = GMAIL_USER
         msg["To"] = GMAIL_RECEIVER
         msg.set_content("今日のニュースを要約しました。添付PDFをご確認ください。")
@@ -145,7 +145,7 @@ def send_email(pdf_filename):
             server.login(GMAIL_USER, GMAIL_APP_PASS)
             server.send_message(msg)
     except Exception as e:
-        raise RuntimeError(f"⚠️ メール送信に失敗しました: {e}")
+        raise RuntimeError(f"メール送信に失敗しました: {e}")
 
 
 def main():
@@ -155,12 +155,12 @@ def main():
         configure_api()
         articles = get_latest_news(max_articles=5)
         if not articles:
-            print("❌ ニュース記事が取得できませんでした。")
+            print("ニュース記事が取得できませんでした。")
             return
         pdf_filename = create_pdf(process_articles(articles))
         send_email(pdf_filename)
     except Exception as e:
-        print(f"⚠️ エラー発生: {e}")
+        print(f"エラー発生: {e}")
 
 
 if __name__ == "__main__":
